@@ -82,5 +82,4 @@ colorPulseTween:Play()
 tween.Completed:Connect(function()
 	screenGui:Destroy()
 end)
-message.txt
-4 KB
+
